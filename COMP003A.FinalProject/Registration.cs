@@ -21,9 +21,9 @@ public class Registration
     public string TicketID; //Enter Ticket ID:
     public int SeatSection; //Enter Seat Section (1-300):
     public char SeatRow; //Enter Seat Row (A-Z): 
-    public int SeatNumber; //Enter 
+    public int SeatNumber; //Enter Seat Number (1-20): 
     public DateTime RegistrationDate; //Format: (mm/dd/yyyy)
-    public char Attendence; //Have you attended the event? (y/n): 
+    public bool Attendence; //Have you attended the event? (y/n): 
     public bool AssistanceNeeded; //Do you need assistance in the event? (y/n): 
     public bool paid; //Have you paid for the ticket? (y/n)
     
