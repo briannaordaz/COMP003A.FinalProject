@@ -24,6 +24,7 @@ public class Registration
     public int SeatNumber; //Enter 
     public DateTime RegistrationDate; //Format: (mm/dd/yyyy)
     public char Attendence; //Have you attended the event? (y/n): 
+    public bool AssistanceNeeded; //Do you need assistance in the event? (y/n): 
     public bool paid; //Have you paid for the ticket? (y/n)
     
     //Payment Information
