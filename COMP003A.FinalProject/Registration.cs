@@ -23,9 +23,11 @@ public class Registration
     public char SeatRow; //Enter Seat Row (A-Z): 
     public int SeatNumber; //Enter Seat Number (1-20): 
     public DateTime RegistrationDate; //Format: (mm/dd/yyyy)
-    public bool Attendence; //Have you attended the event? (y/n): 
+    public bool Attendance;
     public bool AssistanceNeeded; //Do you need assistance in the event? (y/n): 
-    public bool paid; //Have you paid for the ticket? (y/n)
+    public bool Paid; //Have you paid for the ticket? (y/n)
+    public int GeneralPrice = 50;  //price of General ticket
+    public int VIPPrice = 100; //price of VIP ticket
     
     //Payment Information
     public string PaymentMethod; //Enter Payment Method (cash or card):
