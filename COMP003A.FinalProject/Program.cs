@@ -54,8 +54,10 @@ class Program
                     DisplayRegistration();
                     break;
                 case 3:
+                    SearchEvents();
                     break;
                 case 4:
+                    EventStatistics();
                     break;
                 case 5:
                     Console.WriteLine("Goodbye.");
@@ -280,7 +282,8 @@ class Program
                     Console.WriteLine("Enter Card Number: ");
                     userRegistration.CardNumber = Console.ReadLine();
         
-                    Console.WriteLine("Enter Expiration Date (MM/yyyy): ");
+                    Console.WriteLine("Enter Expiration Date (MM/dd/21" +
+                                      "yyyy): ");
                     userRegistration.Expiration = Console.ReadLine();
         
                     Console.WriteLine("Enter Security Code: ");
@@ -357,6 +360,7 @@ class Program
             if (e.EventName == eventName && e.TicketID == ticketID)
             {
                 found = true;
+                Console.WriteLine("******************* Event Found *************************");
                 e.DisplayRegistrations();
                 return;
             }
@@ -372,7 +376,34 @@ class Program
         
         
     }
-                            
+
+
+    static void EventStatistics()
+    {
+        int sumOfTickets = 0;
+        int sumOfGeneral = 0;
+        int sumOfVIP = 0;
+        int sumOfPrice = 0;
+
+        foreach (Registration e in registrations)
+        {
+            sumOfTickets++;
+
+            if (e.Ticket == "General")
+            {
+                sumOfGeneral++;
+                sumOfPrice += e.GeneralPrice;
+            }
+            else if (e.Ticket == "VIP")
+            {
+                sumOfVIP++;
+                sumOfPrice += e.VIPPrice;
+            }
+            
+        }
+        
+        Console.WriteLine($"Sum of Tickets: {sumOfTickets}\nSum of General: {sumOfGeneral}\nSum of VIP: {sumOfVIP}");
+    }
     
 
 }
