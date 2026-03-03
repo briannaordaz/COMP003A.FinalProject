@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+
 using COMP003A.FinalProject;
 
 /*This is an Event Registration System. The purpose of this system is to register to an event and keep track of how many tickets are stored in the system.
@@ -168,18 +168,20 @@ class Program
             Console.WriteLine("Invalid Input.");
             return;
         }
-
-        if (userRegistration.Ticket == "VIP" && userRegistration.Age > 20)
+        
+        
+        //This is a derived field, if the user has a VIP ticket and is older than 20 then they'll pay the normal vip price
+        if (userRegistration.Ticket == "VIP" && userRegistration.Age >= 20)
         {
             userRegistration.Price = 100;
         }
-        else if (userRegistration.Age < 20 && userRegistration.Ticket == "VIP")
+        else if (userRegistration.Age < 20 && userRegistration.Ticket == "VIP") //if the user is younger than 20 and has a vip ticket they'll get a discount of $80
         {
             userRegistration.Price = 80;
         }
-        else
+        else //if the user is buying a general ticket then they'll pay the normal price
         {
-            userRegistration.Price = 50;
+            userRegistration.Price = 50; 
         }
 
         
@@ -413,17 +415,19 @@ class Program
             if (e.Ticket == "General")
             {
                 sumOfGeneral++;
+                sumOfPrice += e.Price;
                 
             }
             else if (e.Ticket == "VIP")
             {
                 sumOfVIP++;
+                sumOfPrice += e.Price;
                 
             }
             
         }
         
-        Console.WriteLine($"Sum of Tickets: {sumOfTickets}\nSum of General: {sumOfGeneral}\nSum of VIP: {sumOfVIP}");
+        Console.WriteLine($"Sum of Tickets: {sumOfTickets}\nSum of General: {sumOfGeneral}\nSum of VIP: {sumOfVIP}\ntotal cost: {sumOfPrice}");
     }
     
 
