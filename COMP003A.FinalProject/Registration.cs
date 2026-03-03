@@ -28,6 +28,7 @@ public class Registration
     public bool Paid; //Have you paid for the ticket? (y/n)
     public int GeneralPrice = 50;  //price of General ticket
     public int VIPPrice = 100; //price of VIP ticket
+    public int Price;
     
     //Payment Information
     public string PaymentMethod; //Enter Payment Method (cash or card):

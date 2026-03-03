@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using COMP003A.FinalProject;
 
-//Event Registration System
+/*This is an Event Registration System. The purpose of this system is to register to an event and keep track of how many tickets are stored in the system.
+ This system has 5 menu options. The first one is '1. Enter Event' where a user is asked to enter their personal information,
+ the event information, and then their payment information (if they haven't paid yet). The second option is '2. View Events', this is where all events are displayed. 
+ Option three is '3. Search Events', in this option users are required to enter the event name and the ticket ID, once they enter that information, they should be able to
+ view the Event information. The fourth option is '4. Display Event Statistics' this is where the user will be able to see how many tickets are in the system, how many are General
+ tickets and how many are VIP tickets. The last option is '5. Exit', where the user exits the system. */
 
 class Program
 {
@@ -164,6 +169,21 @@ class Program
             return;
         }
 
+        if (userRegistration.Ticket == "VIP" && userRegistration.Age > 20)
+        {
+            userRegistration.Price = 100;
+        }
+        else if (userRegistration.Age < 20 && userRegistration.Ticket == "VIP")
+        {
+            userRegistration.Price = 80;
+        }
+        else
+        {
+            userRegistration.Price = 50;
+        }
+
+        
+        
         Console.WriteLine("Enter Ticket ID: "); 
         userRegistration.TicketID = Console.ReadLine();
         
@@ -282,12 +302,13 @@ class Program
                     Console.WriteLine("Enter Card Number: ");
                     userRegistration.CardNumber = Console.ReadLine();
         
-                    Console.WriteLine("Enter Expiration Date (MM/dd/21" +
-                                      "yyyy): ");
+                    Console.WriteLine("Enter Expiration Date (MM/dd/yyyy): ");
                     userRegistration.Expiration = Console.ReadLine();
         
                     Console.WriteLine("Enter Security Code: ");
                     userRegistration.SecurityCode = Console.ReadLine();
+                    
+                    Console.WriteLine("*****Information Successfully Saved!*****");
                 }
                 else if (userRegistration.PaymentMethod.ToLower() == "cash")
                 {
@@ -392,12 +413,12 @@ class Program
             if (e.Ticket == "General")
             {
                 sumOfGeneral++;
-                sumOfPrice += e.GeneralPrice;
+                
             }
             else if (e.Ticket == "VIP")
             {
                 sumOfVIP++;
-                sumOfPrice += e.VIPPrice;
+                
             }
             
         }
@@ -407,7 +428,6 @@ class Program
     
 
 }
-
 
 
 
