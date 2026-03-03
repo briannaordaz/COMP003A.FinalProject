@@ -335,7 +335,43 @@ class Program
             
     }
 
-    
+    //This method's purpose is to search for stored events 
+    static void SearchEvents()
+    {
+        Console.WriteLine("Enter Event Name: ");
+        string eventName = Console.ReadLine();
+        
+        Console.WriteLine("Enter Ticket ID: ");
+        string ticketID = Console.ReadLine();
+        
+        bool found = false;
+        
+        if (registrations.Count == 0) 
+        {
+            Console.WriteLine("No registrations found. "); 
+            return;
+        }
+
+        foreach (Registration e in registrations)
+        {
+            if (e.EventName == eventName && e.TicketID == ticketID)
+            {
+                found = true;
+                e.DisplayRegistrations();
+                return;
+            }
+            
+        }
+
+        if (!found)
+        {
+            
+            Console.WriteLine("No Event found that matched the TicketID and Event Name you entered. ");
+            
+        }
+        
+        
+    }
                             
     
 

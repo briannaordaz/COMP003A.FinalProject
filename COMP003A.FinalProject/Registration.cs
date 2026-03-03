@@ -46,16 +46,18 @@ public class Registration
     
     public void DisplayRegistrations()
     {
-         
+        
+        Console.WriteLine($"Ticket ID: {TicketID}");
         Console.WriteLine($"User Registered: {FirstName} + {LastName}");
         Console.WriteLine($"Event Name: {EventName}");
         Console.WriteLine($"Event Date: {EventDate}");
         Console.WriteLine($"Ticket Type: {Ticket}");
-        Console.WriteLine($"Ticket ID: {TicketID}");
         Console.WriteLine($"Seat Section: {SeatSection}, Seat Row: {SeatRow}, Seat Number: {SeatNumber} | {SeatSection}, {SeatRow}, {SeatNumber}, {SeatNumber}");
         
         
     }
+
+    
 
 
 
