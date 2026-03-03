@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using COMP003A.FinalProject;
 
 //Event Registration System
@@ -41,7 +42,7 @@ class Program
             catch (FormatException)
             {
                 Console.WriteLine("Invalid Input.");
-                break;
+                continue;
             }
 
             switch (choice)
@@ -50,7 +51,7 @@ class Program
                     NewEventRegistration();
                     break;
                 case 2:
-                    
+                    DisplayRegistration();
                     break;
                 case 3:
                     break;
@@ -67,7 +68,7 @@ class Program
     }
     
     
-    static public void NewEventRegistration()
+    static void NewEventRegistration()
     { 
         Registration userRegistration = new Registration(); //An object named userRegistration that stores fields from the Registration class
 
@@ -76,7 +77,18 @@ class Program
         
         //Personal Information
         Console.WriteLine("Enter Age: ");
-        userRegistration.Age = Convert.ToInt32(Console.ReadLine()); //converts user input into an integer and saves it in the Age field of the "userRegistration" Object
+        try
+        {
+            
+            userRegistration.Age = Convert.ToInt32(Console.ReadLine()); //converts user input into an integer and saves it in the Age field of the "userRegistration" Object
+
+            
+        }
+        catch
+        {
+            Console.WriteLine("Invalid Age.");
+            return;
+        }
         if (userRegistration.Age < 16)
         {
             Console.WriteLine("You are too young to register. ");
@@ -104,6 +116,9 @@ class Program
         Console.WriteLine("Enter City: ");
         userRegistration.City = Console.ReadLine();
         
+        Console.WriteLine("Enter State: ");
+        userRegistration.State = Console.ReadLine();
+        
         Console.WriteLine("Enter ZipCode: ");
         userRegistration.ZipCode = Console.ReadLine();
         
@@ -122,83 +137,114 @@ class Program
         
         Console.WriteLine("1. General \n2. VIP ");
         Console.WriteLine("Enter Ticket Type (1 or 2): "); //selection
-        int userChoice = int.Parse(Console.ReadLine());
-        if (userChoice == 1)
+        try
         {
-            userRegistration.Ticket = "General";
-            Console.WriteLine($"The General Ticket is ${userRegistration.GeneralPrice}" );
+            int userChoice = int.Parse(Console.ReadLine());
+            if (userChoice == 1)
+            {
+                userRegistration.Ticket = "General";
+                Console.WriteLine($"The General Ticket is ${userRegistration.GeneralPrice}");
+            }
+            else if (userChoice == 2)
+            {
+                userRegistration.Ticket = "VIP";
+                Console.WriteLine("The VIP Ticket is $" + userRegistration.VIPPrice);
+            }
+            else
+            {
+                Console.WriteLine("Only choose between 1 and 2!!");
+                return;
+            }
         }
-        else if (userChoice == 2)
+        catch
         {
-            userRegistration.Ticket = "VIP";
-            Console.WriteLine("The VIP Ticket is $" + userRegistration.VIPPrice);
-        }
-        else
-        {
-            Console.WriteLine("Only choose between 1 and 2!!");
+            Console.WriteLine("Invalid Input.");
             return;
         }
-        
-        
+
         Console.WriteLine("Enter Ticket ID: "); 
         userRegistration.TicketID = Console.ReadLine();
         
         
+        
+        
+        
         //Seat Information
-        Console.WriteLine("Enter Seat Section (1-300): "); 
-        userRegistration.SeatSection = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter Seat Section (1-300): ");
 
-        if (userRegistration.SeatSection < 1 || userRegistration.SeatSection > 300)
+        try
         {
-            Console.WriteLine("Invalid Seat Section. Please enter a seat in the sections 1-300");
-            return;
-        }
-        else
-        {
-            
-            
-            Console.WriteLine("Enter Seat Row (A-Z): ");
-            string row = Console.ReadLine().ToUpper();
-            
-            if (string.IsNullOrEmpty(row))
+            userRegistration.SeatSection = Convert.ToInt32(Console.ReadLine());
+
+            if (userRegistration.SeatSection < 1 || userRegistration.SeatSection > 300)
             {
-                
-                
-                Console.WriteLine("Please enter a row (A-Z)");
-                return;
-                
-            }
-            userRegistration.SeatRow = row[0];
-            
-             if (userRegistration.SeatRow < 'A' || userRegistration.SeatRow > 'Z')
-            {
-                Console.WriteLine("Invalid Seat Row. Please enter a seat in the rows A-Z");
+                Console.WriteLine("Invalid Seat Section. Please enter a seat in the sections 1-300");
                 return;
             }
             else
             {
 
 
+                Console.WriteLine("Enter Seat Row (A-Z): ");
+                string row = Console.ReadLine().ToUpper();
 
-
-                Console.WriteLine("Enter Seat Number (1-20): ");
-                userRegistration.SeatNumber = Convert.ToInt32(Console.ReadLine());
-
-                if (userRegistration.SeatNumber < 1 || userRegistration.SeatNumber > 20)
+                if (string.IsNullOrEmpty(row))
                 {
-                    Console.WriteLine("Invalid Seat Number. Please enter a seat in the range 1-20");
+
+
+                    Console.WriteLine("Please enter a row (A-Z)");
+                    return;
+
+                }
+
+                userRegistration.SeatRow = row[0];
+
+                if (userRegistration.SeatRow < 'A' || userRegistration.SeatRow > 'Z')
+                {
+                    Console.WriteLine("Invalid Seat Row. Please enter a seat in the rows A-Z");
                     return;
                 }
                 else
                 {
-                    Console.WriteLine("Seat successfully entered. ");
+
+
+
+
+                    Console.WriteLine("Enter Seat Number (1-20): ");
+                    try
+                    {
+                        userRegistration.SeatNumber = Convert.ToInt32(Console.ReadLine());
+
+                        if (userRegistration.SeatNumber < 1 || userRegistration.SeatNumber > 20)
+                        {
+                            Console.WriteLine("Invalid Seat Number. Please enter a seat in the range 1-20");
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Seat successfully entered. ");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Invalid Input");
+                        return;
+                    }
+
                 }
 
             }
-
+        }
+        catch
+        {
+            Console.WriteLine("Invalid Input.");
+            return;
         }
         
         
+        
+        
+
         //Attendance information
         Console.WriteLine("Have you attended this Event? (y/n): ");
         string Attendance = Console.ReadLine().ToUpper();
@@ -266,6 +312,31 @@ class Program
 
     
     
+    
+    
+    
+    static void DisplayRegistration() //The purpose of this method is to display all registrations in the system when the user presses the menu option 2
+    {
+       
+
+        if (registrations.Count == 0) //This checks if there are any registrations
+        {
+            Console.WriteLine("No registrations found!"); //if there are no registrations the program will let the user know there are no registrations
+            return;
+        }
+        else
+        {
+            foreach (Registration e in registrations) //This goes through each registration object and displays it
+            {
+                Console.WriteLine("*********************************************");
+                e.DisplayRegistrations(); 
+            } 
+        }
+            
+    }
+
+    
+                            
     
 
 }
